@@ -12,6 +12,7 @@ from src.config import constants
 from src.google_sheet import google_sheet_service
 from src import repository
 from src.github import github_client
+from src.github.repository_url import normalize_github_repository_url
 
 ADD_PROJECT_COMMAND_NAME = "addproject"
 
@@ -120,7 +121,13 @@ async def add_project(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await reply_with_error("В сообщении нет ссылки на проект")
         return
 
-    if "github.com" in project_link:
+    if "github.com" in project_link.lower():
+        try:
+            project_link = normalize_github_repository_url(project_link)
+        except ValueError:
+            await reply_with_error("Некорректная ссылка на GitHub репозиторий")
+            return
+
         repository_available = github_client.is_repository_available(project_link)
 
         if repository_available is None:
@@ -213,7 +220,7 @@ def parse_link(message: Message) -> str | None:
 
 
 def normalize_link(link: str) -> str:
-    if link.startswith("http"):
+    if link.lower().startswith(("http://", "https://")):
         return link
 
     return "https://" + link
