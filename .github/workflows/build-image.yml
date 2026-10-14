@@ -28,11 +28,8 @@ jobs:
       - name: Install test and formatting tools
         run: python -m pip install pytest==8.3.4 black==25.1.0
 
-      - name: Check Black formatting
-        run: python -m black --check src/handler/add_project_handler.py src/github/repository_url.py tests/test_repository_url.py
-
-      - name: Run unit tests
-        run: python -m pytest -q tests
+      - name: Check formatting and run unit tests
+        run: bash scripts/check.sh
 
   build-and-push:
     if: github.event_name == 'push'

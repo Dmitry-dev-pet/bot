@@ -105,3 +105,14 @@ yoyo apply --database postgresql://user:password@localhost:5433/it-mentor-commun
 
  - C помощью UI pycharm
  - Через `python -m src.main`
+
+## Локальные проверки перед PR
+
+Проверка форматирования Black и unit-тестов (без Telegram, PostgreSQL, Google Sheets и `.env`):
+
+```sh
+python -m pip install black==25.1.0 pytest==8.3.4
+bash scripts/check.sh
+```
+
+Скрипт автоматически выбирает `.venv/bin/python`, если он существует, иначе `python3`. Можно передать интерпретатор явно: `CHECK_PYTHON=/path/to/python bash scripts/check.sh`. Тот же скрипт используется в GitHub Actions перед сборкой Docker-образа.
