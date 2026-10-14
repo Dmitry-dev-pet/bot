@@ -29,9 +29,18 @@ from src.github.repository_url import normalize_github_repository_url
             "https://github.com/Totsamyq/Simulation/?tab=readme#intro",
             "https://github.com/Totsamyq/Simulation",
         ),
-        ("http://github.com/Totsamyq/Simulation/", "https://github.com/Totsamyq/Simulation"),
-        ("www.github.com/Totsamyq/Simulation.git/", "https://github.com/Totsamyq/Simulation"),
-        ("HTTPS://GITHUB.COM/Totsamyq/Simulation", "https://github.com/Totsamyq/Simulation"),
+        (
+            "http://github.com/Totsamyq/Simulation/",
+            "https://github.com/Totsamyq/Simulation",
+        ),
+        (
+            "www.github.com/Totsamyq/Simulation.git/",
+            "https://github.com/Totsamyq/Simulation",
+        ),
+        (
+            "HTTPS://GITHUB.COM/Totsamyq/Simulation",
+            "https://github.com/Totsamyq/Simulation",
+        ),
         (
             "  https://github.com/Totsamyq/Simulation  ",
             "https://github.com/Totsamyq/Simulation",
@@ -48,7 +57,10 @@ from src.github.repository_url import normalize_github_repository_url
             "https://github.com/Totsamyq/Simulation/pull/123",
             "https://github.com/Totsamyq/Simulation",
         ),
-        ("https://github.com/user/repo_name.v2", "https://github.com/user/repo_name.v2"),
+        (
+            "https://github.com/user/repo_name.v2",
+            "https://github.com/user/repo_name.v2",
+        ),
     ],
 )
 def test_canonical_github_repository_url(raw: str, expected: str) -> None:
